@@ -1,1 +1,10 @@
 .DS_Store
+J2OC/bin
+J2OC/build
+J2OC/ship
+J2OCLibrary/build
+J2OCLibrary/J2OCLib/headers
+J2OCLibrary/J2OCLib/jrtl
+J2OCLibrary/missing
+J2OCLibrary/ship
+J2OCLibrary/native.xml
