@@ -1,0 +1,28 @@
+/*  SyntheticAttribute.java
+ *
+ *  Created on Feb 6, 2010 by William Edward Woody
+ */
+
+package com.chaosinmotion.j2oc.vm.data.attributes;
+
+import java.io.IOException;
+
+import com.chaosinmotion.j2oc.vm.data.constants.Constant;
+
+/**
+ * Represents the synthetic attribute. There are no parameters
+ */
+public class SyntheticAttribute extends Attribute
+{
+    public SyntheticAttribute(String n)
+    {
+        super(n);
+    }
+
+    @Override
+    public void resolveConstant(Constant[] constantPool) throws IOException
+    {
+    }
+}
+
+

@@ -1,0 +1,22 @@
+<html>
+<head><title>Package</title></head>
+<body>
+<p>An operator represents an interemediate operation in a collection of operations that
+comprise an instruction. An instruction represents a single generated statement.</p>
+<p>The difference is deliberate: when one instruction evaluates a collection of
+operators, we can express this as a single C or Objective C statement: thus, the
+operators:<br><br>
+
+push 1<br>
+push 2<br>
+add<br>
+push 3<br>
+mul<br>
+arraynew int<br>
+
+will generate new[(1+2)*3];</p>
+
+<p>This implies that if we execute a statement that doesn't return anything, then we need
+to close out our operators by using temporary registers.</p>
+
+</body>

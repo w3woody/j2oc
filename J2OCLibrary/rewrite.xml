@@ -1,0 +1,465 @@
+<rewrite>
+	<!-- Ignore these classes; written entirely by hand -->
+	<ignore class="java_lang_Class" />
+	<ignore class="java_lang_Object" />
+	<ignore class="java_lang_String" />
+
+    <method name="createRefArray_java_lang_Object_ARRAYTYPE___int" class="com/chaosinmotion/j2oclibrary/rtl/Array">
+        <![CDATA[
++ (J2OCRefArray *)createRefArray_java_lang_Object_ARRAYTYPE___int:(int32_t)v0_i
+{
+	// Takes advantage of the fact that internally we only track arrays, not the type
+	return [[[J2OCRefArray alloc] initArrayWithSize:v0_i] autorelease];
+}
+]]>
+    </method>
+
+    <method name="digit_int___int_int" class="java/lang/Character">
+        <![CDATA[
++ (int32_t)digit_int___int_int:(int32_t)codePoint :(int32_t)radix
+{
+	// Kludge: We only handle ASCII
+	int tmp;
+	
+	if ((codePoint >= '0') && (codePoint <= '9')) tmp = codePoint - '0';
+	else if ((codePoint >= 'a') && (codePoint <= 'z')) tmp = codePoint - 'a' + 10;
+	else if ((codePoint >= 'A') && (codePoint <= 'Z')) tmp = codePoint - 'A' + 10;
+	else tmp = -1;
+	
+	if (tmp >= radix) tmp = -1;
+	return tmp;
+}
+]]>
+    </method>
+
+    <method name="getNumericValue_int___int" class="java/lang/Character">
+        <![CDATA[
++ (int32_t)getNumericValue_int___int:(int32_t)codePoint
+{
+	// Kludge: we only handle ASCII
+	int tmp;
+	
+	if ((codePoint >= '0') && (codePoint <= '9')) tmp = codePoint - '0';
+	else if ((codePoint >= 'a') && (codePoint <= 'z')) tmp = codePoint - 'a' + 10;
+	else if ((codePoint >= 'A') && (codePoint <= 'Z')) tmp = codePoint - 'A' + 10;
+	else tmp = -1;
+	
+	return tmp;
+}
+]]>
+    </method>
+    
+    <method name="_nan_double__" class="java/lang/Double">
+        <![CDATA[
++ (double)_nan_double__
+{
+	return NAN;
+}
+]]>
+    </method>
+    
+    <method name="doubleToLongBits_long___double" class="java/lang/Double">
+        <![CDATA[
++ (int64_t)doubleToLongBits_long___double:(double)v0_d
+{
+	return *((int64_t *)&v0_d);
+}
+]]>
+    </method>
+
+    <method name="doubleToRawLongBits_long___double" class="java/lang/Double">
+        <![CDATA[
++ (int64_t)doubleToRawLongBits_long___double:(double)v0_d
+{
+	return *((int64_t *)&v0_d);
+}
+]]>
+    </method>
+
+    <method name="longBitsToDouble_double___long" class="java/lang/Double">
+        <![CDATA[
++ (double)longBitsToDouble_double___long:(int64_t)v0_l
+{
+	return *((double *)&v0_l);
+}
+]]>
+    </method>
+
+    <method name="parseDouble_double___java_lang_String" class="java/lang/Double">
+        <![CDATA[
++ (double)parseDouble_double___java_lang_String:(java_lang_String *)v0_a
+{
+	return [(NSString *)v0_a doubleValue];
+}
+]]>
+    </method>
+
+    <method name="toString_java_lang_String___double" class="java/lang/Double">
+        <![CDATA[
++ (java_lang_String *)toString_java_lang_String___double:(double)v0_d
+{
+	return [NSString stringWithFormat:@"%f",v0_d];
+}
+]]>
+    </method>
+
+    <method name="_nan_float__" class="java/lang/Float">
+        <![CDATA[
++ (float)_nan_float__
+{
+	return NAN;
+}
+]]>
+    </method>
+
+    <method name="floatToIntBits_int___float" class="java/lang/Float">
+        <![CDATA[
++ (int32_t)floatToIntBits_int___float:(float)v0_f
+{
+	return *((int32_t *)&v0_f);
+}
+]]>
+    </method>
+
+    <method name="floatToRawIntBits_int___float" class="java/lang/Float">
+        <![CDATA[
++ (int32_t)floatToRawIntBits_int___float:(float)v0_f
+{
+	return *((int32_t *)&v0_f);
+}
+]]>
+    </method>
+
+    <method name="intBitsToFloat_float___int" class="java/lang/Float">
+        <![CDATA[
++ (float)intBitsToFloat_float___int:(int32_t)v0_i
+{
+	return *((float *)&v0_i);
+}
+]]>
+    </method>
+
+    <method name="parseFloat_float___java_lang_String" class="java/lang/Float">
+        <![CDATA[
++ (float)parseFloat_float___java_lang_String:(java_lang_String *)v0_a
+{
+	return [(NSString *)v0_a floatValue];
+}
+]]>
+    </method>
+
+    <method name="toString_java_lang_String___float" class="java/lang/Float">
+        <![CDATA[
++ (java_lang_String *)toString_java_lang_String___float:(float)v0_f
+{
+	return [NSString stringWithFormat:@"%f",v0_f];
+}
+]]>
+    </method>
+
+    <method name="acos_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)acos_double___double:(double)v0_d
+{
+	return acos(v0_d);
+}
+]]>
+    </method>
+
+    <method name="asin_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)asin_double___double:(double)v0_d
+{
+	return asin(v0_d);
+}
+]]>
+    </method>
+
+    <method name="atan_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)atan_double___double:(double)v0_d
+{
+	return atan(v0_d);
+}
+]]>
+    </method>
+
+    <method name="atan2_double___double_double" class="java/lang/Math">
+        <![CDATA[
++ (double)atan2_double___double_double:(double)v0_d :(double)v2_d
+{
+	return atan2(v0_d,v2_d);
+}
+]]>
+    </method>
+
+    <method name="cbrt_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)cbrt_double___double:(double)v0_d
+{
+	return pow(v0_d,1.0/3.0);
+}
+]]>
+    </method>
+
+    <method name="ceil_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)ceil_double___double:(double)v0_d
+{
+	return ceil(v0_d);
+}
+]]>
+    </method>
+
+    <method name="cos_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)cos_double___double:(double)v0_d
+{
+	return cos(v0_d);
+}
+]]>
+    </method>
+
+    <method name="cosh_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)cosh_double___double:(double)v0_d
+{
+	return cosh(v0_d);
+}
+]]>
+    </method>
+
+    <method name="exp_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)exp_double___double:(double)v0_d
+{
+	return exp(v0_d);
+}
+]]>
+    </method>
+
+    <method name="expm1_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)expm1_double___double:(double)v0_d
+{
+	return exp(v0_d)-1;
+}
+]]>
+    </method>
+
+    <method name="floor_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)floor_double___double:(double)v0_d
+{
+	return floor(v0_d);
+}
+]]>
+    </method>
+
+    <method name="hypot_double___double_double" class="java/lang/Math">
+        <![CDATA[
++ (double)hypot_double___double_double:(double)v0_d :(double)v2_d
+{
+	return sqrt(v0_d*v0_d + v2_d*v2_d);
+}
+]]>
+    </method>
+
+    <method name="IEEEremainder_double___double_double" class="java/lang/Math">
+        <![CDATA[
++ (double)IEEEremainder_double___double_double:(double)v0_d :(double)v2_d
+{
+	return fmod(v0_d,v2_d);
+}
+]]>
+    </method>
+
+    <method name="log_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)log_double___double:(double)v0_d
+{
+	return log(v0_d);
+}
+]]>
+    </method>
+
+    <method name="log10_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)log10_double___double:(double)v0_d
+{
+	return log10(v0_d);
+}
+]]>
+    </method>
+
+    <method name="log1p_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)log1p_double___double:(double)v0_d
+{
+	return log(v0_d + 1);
+}
+]]>
+    </method>
+
+    <method name="pow_double___double_double" class="java/lang/Math">
+        <![CDATA[
++ (double)pow_double___double_double:(double)v0_d :(double)v2_d
+{
+	return pow(v0_d,v2_d);
+}
+]]>
+    </method>
+
+    <method name="rint_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)rint_double___double:(double)v0_d
+{
+	return floor(v0_d + 0.5);
+}
+]]>
+    </method>
+
+    <method name="signum_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)signum_double___double:(double)v0_d
+{
+	if (v0_d < 0) return -1;
+	if (v0_d > 0) return 1;
+	return 0;
+}
+]]>
+    </method>
+
+    <method name="signum_float___float" class="java/lang/Math">
+        <![CDATA[
++ (float)signum_float___float:(float)v0_f
+{
+	if (v0_f < 0) return -1;
+	if (v0_f > 0) return 1;
+	return 0;
+}
+]]>
+    </method>
+
+    <method name="sin_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)sin_double___double:(double)v0_d
+{
+	return sin(v0_d);
+}
+]]>
+    </method>
+
+    <method name="sinh_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)sinh_double___double:(double)v0_d
+{
+	return sinh(v0_d);
+}
+]]>
+    </method>
+
+    <method name="sqrt_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)sqrt_double___double:(double)v0_d
+{
+	return sqrt(v0_d);
+}
+]]>
+    </method>
+
+    <method name="tan_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)tan_double___double:(double)v0_d
+{
+	return tan(v0_d);
+}
+]]>
+    </method>
+
+    <method name="tanh_double___double" class="java/lang/Math">
+        <![CDATA[
++ (double)tanh_double___double:(double)v0_d
+{
+	return tanh(v0_d);
+}
+]]>
+    </method>
+
+    <method name="nextafter_double___double_double" class="java/lang/Math">
+        <![CDATA[
++ (double)nextafter_double___double_double:(double)v0_d :(double)v2_d
+{
+	return v0_d;		// Not correct. Sorry.
+}
+]]>
+    </method>
+
+    <method name="nextafterf_float___float_float" class="java/lang/Math">
+        <![CDATA[
++ (float)nextafterf_float___float_float:(float)v0_f :(float)v1_f
+{
+	return v0_f;		// Not correct. Sorry.
+}
+]]>
+    </method>
+
+    <method name="println___java_lang_String" class="java/lang/System$InternalPrintStream">
+        <![CDATA[
+- (void)println___java_lang_String:(java_lang_String *)v1_a
+{
+	// This causes System.out.println() go to NSLog()
+	NSLog(@"%@",v1_a);
+}
+]]>
+    </method>
+
+    <method name="arraycopy___java_lang_Object_int_java_lang_Object_int_int" class="java/lang/System">
+        <![CDATA[
++ (void)arraycopy___java_lang_Object_int_java_lang_Object_int_int:(java_lang_Object *)v0_a :(int32_t)v1_i :(java_lang_Object *)v2_a :(int32_t)v3_i :(int32_t)v4_i
+{
+    j2oc_arraycopy(v0_a,v1_i,v2_a,v3_i,v4_i);
+}
+]]>
+    </method>
+
+    <method name="fillInStackTrace_java_lang_Throwable__" class="java/lang/Throwable">
+        <![CDATA[
+- (java_lang_Throwable *)fillInStackTrace_java_lang_Throwable__
+{
+	// Once I sort out how to do a stack trace, this will do the trick. For now, punt.
+}
+]]>
+    </method>
+
+    <method name="getStackTraceImpl_java_lang_StackTraceElement_ARRAYTYPE__" class="java/lang/Throwable">
+        <![CDATA[
+- (J2OCRefArray *)getStackTraceImpl_java_lang_StackTraceElement_ARRAYTYPE__
+{
+	// Once I sort this out, I'll complete this thing. For now, punt
+	return [[[J2OCRefArray alloc] initArrayWithSize:0] autorelease];
+}
+]]>
+    </method>
+
+    <method name="format_java_util_Formatter___java_lang_String_java_lang_Object_ARRAYTYPE" class="java/util/Formatter">
+        <![CDATA[
+- (java_util_Formatter *)format_java_util_Formatter___java_lang_String_java_lang_Object_ARRAYTYPE:(java_lang_String *)v1_a :(J2OCRefArray *)v2_a
+{
+// TODO: Native Code    
+    return self;
+}
+]]>
+    </method>
+
+    <method name="toString_java_lang_String__" class="java/util/Formatter">
+        <![CDATA[
+- (java_lang_String *)toString_java_lang_String__
+{
+// TODO: Native Code
+	return @"";
+}
+]]>
+    </method>
+
+</rewrite>

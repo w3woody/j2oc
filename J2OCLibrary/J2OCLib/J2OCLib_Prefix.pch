@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'J2OCMacLib' target in the 'J2OCMacLib' project.
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif

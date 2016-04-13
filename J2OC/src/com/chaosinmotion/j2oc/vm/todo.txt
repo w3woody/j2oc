@@ -1,0 +1,2 @@
+(1) Finish java.lang.String
+(2) Write the j2oc_xxx functions to support the string conversion support stuff.

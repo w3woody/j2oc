@@ -1,0 +1,106 @@
+<project name="J2OCLibrary" default="dist" basedir=".">
+	<description>Build the J2OC Objective-C library</description>
+	
+	<property name="src" location="src" />
+	<property name="build" location="build" />
+	<property name="ship" location="ship" />
+	<property name="doc" location="ship/docs" />
+
+	<target name="init">
+		<tstamp />
+		<mkdir dir="${build}" />
+		<mkdir dir="${ship}" />
+		<mkdir dir="${doc}" />
+	</target>
+		
+	<target name="version">
+		<propertyfile file="build.info">
+			<entry key="version.major" type="int" default="1" />
+			<entry key="version.minor" type="int" default="0" />
+			<entry key="version.build" type="int" operation="+" value="1"/>
+		</propertyfile>
+		<property file="build.info" />
+	</target>
+	
+	<target name="compile" depends="init,version" description="Compile the sources">
+		<!-- Compile the sources -->
+		<javac srcdir="${src}" destdir="${build}" debug="true" source="1.6" target="1.6">
+			<classpath>
+				<pathelement path="${classpath}" />
+			</classpath>
+		</javac>
+	</target>
+		
+	<target name="j2oc" depends="compile" description="Cross compile to Objective C">
+		<!-- Build J2OC -->
+		<ant antfile="../J2OC/build.xml" dir="../J2OC" inheritAll="false" target="dist"/>
+		<!-- Invoke J2OC -->
+		<!-- -v -w J2OCLib/jrtl build -m missing -r native.xml -u rewrite.xml -h J2OCLib/headers -->
+		<java dir="${basedir}"
+				jar="${basedir}/../J2OC/ship/j2oc.jar"
+				fork="true"
+				failonerror="true"
+				maxmemory="512m">
+			<arg value="-v" />
+			<arg value="-w" />
+			<arg value="J2OCLib/jrtl" />
+			<arg value="${build}" />
+			<arg value="-m" />
+			<arg value="missing" />
+			<arg value="-r" />
+			<arg value="native.xml" />
+			<arg value="-u" />
+			<arg value="rewrite.xml" />
+			<arg value="-h" />
+			<arg value="J2OCLib/headers" />
+			<classpath>
+				<pathelement location="${basedir}/../J2OC/ship/j2oc.jar" />
+				<pathelement path="${java.class.path}" />
+			</classpath>
+		</java>
+	</target>
+	
+	<target name="javadocs" depends="init,version" description="Compile the documents">
+		<!-- Compile the docs -->
+		<javadoc destdir="${doc}" author="true" version="true" use="true" windowtitle="J2OC Core Library">
+			<packageset dir="${src}" defaultexcludes="yes">
+				<include name="**" />
+			</packageset>
+			<classpath>
+				<pathelement path="${classpath}" />
+			</classpath>
+			
+			<doctitle><![CDATA[<b>J2OC Java Library</b>]]></doctitle>
+			<bottom><![CDATA[<i>Version ${version.major}.${version.minor}.${version.build}</i>]]></bottom>
+		</javadoc>
+	</target>
+	
+	<target name="src" depends="init" description="Build source distribution">
+		<zip destfile="${ship}/j2oclibrary.zip">
+			<zipfileset dir="src" prefix="src" />
+			<zipfileset dir="J2OCLib" prefix="J2OCLib">
+				<exclude name="**/headers/**" />
+				<exclude name="**/jrtl/**" />
+				<exclude name="**/build/**" />
+			</zipfileset>
+			<fileset dir="." includes="build.xml" />
+			<fileset dir="." includes="build.info" />
+			<fileset dir="." includes="rewrite.xml" />
+			<fileset dir="." includes="readme.txt" />
+			<fileset dir="." includes="license.txt" />
+			<fileset dir="." includes="apache_license.txt" />
+			<fileset dir="." includes=".classpath" />
+			<fileset dir="." includes=".project" />
+		</zip>
+	</target>
+	
+	<target name="dist" depends="clean,compile,javadocs,src,j2oc" description="Build the distribution" />
+	
+	<target name="clean" description="Clean the build">
+		<delete dir="${doc}" />
+		<delete dir="${ship}" />
+		<delete dir="${build}" />
+		<delete dir="missing" />
+		<delete dir="native.xml" />
+	</target>
+</project>
